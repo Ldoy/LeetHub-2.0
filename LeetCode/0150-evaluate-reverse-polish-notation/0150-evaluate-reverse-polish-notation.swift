@@ -1,28 +1,36 @@
 class Solution {
-     private var list = [Int]()
+    private var list = [Int]()
 
     func evalRPN(_ tokens: [String]) -> Int {
         
-        // 나눗셈할 땐 몫만 가져오기
-        tokens.map { element in
+        for token in tokens {
             
-            if let element = Int(element) {
-                list.append(element)
-            } else {
+            switch token {
+            case "+":
                 let last = list.popLast()!
                 let beforeLast = list.popLast()!
-                
-                if element == "+" {
-                    list.append(last + beforeLast)
-                } else if element == "-" {
-                    list.append(beforeLast - last)
-                } else if element == "*" {
-                    list.append(beforeLast * last)
-                } else if element == "/" {
-                    list.append(beforeLast / last)
-                }
+                list.append(last + beforeLast)
+
+            case "-":
+                let last = list.popLast()!
+                let beforeLast = list.popLast()!
+                list.append(beforeLast - last)
+
+            case "*":
+                let last = list.popLast()!
+                let beforeLast = list.popLast()!
+                list.append(beforeLast * last)
+
+            case "/":
+                let last = list.popLast()!
+                let beforeLast = list.popLast()!
+                list.append(beforeLast / last)
+
+            default:
+                list.append(Int(token)!)
             }
         }
+        
         return list.last!
     }
 }
