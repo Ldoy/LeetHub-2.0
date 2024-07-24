@@ -9,8 +9,6 @@ func wordPattern(_ pattern: String, _ s: String) -> Bool {
     var sArray = s.split(separator: " ").map { String($0) }
     var pArray = pattern.map { Character(extendedGraphemeClusterLiteral: $0) }
     
-   
-    
     if sArray.count != pArray.count {
         return false
     }
