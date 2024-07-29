@@ -11,31 +11,35 @@
  
 class Solution {
     func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
-        var newhead: ListNode? = ListNode(-1)
-        newhead?.next = head
-        var temp = newhead
-
-        var count = 0
-
-        while temp != nil {
-            if count > right {
-                break
-            }
-            if count == left-1 {
-                let temphead = temp 
-                let temp2 = temp?.next
-                while (count < right-1) && temp2 != nil {
-                    var temp3 = temp2?.next
-                    temp2?.next = temp3?.next                    
-                    temp3?.next = temphead?.next
-                    temphead?.next = temp3
-                    count += 1
-                }
-            }
-            temp = temp?.next
-            count += 1
+        guard let head = head, left != right else { return head }
+        
+        let dummyNodeHead = ListNode(-1)
+        dummyNodeHead.next = head
+        
+        var tempCurrent: ListNode? = dummyNodeHead
+        var tempLeftPrev: ListNode? = dummyNodeHead
+        
+        // 왼쪽 직전 노드 찾기
+        for _ in 0..<(left - 1) {
+            tempLeftPrev = tempLeftPrev?.next
         }
-
-        return newhead?.next
+        
+        tempCurrent = tempLeftPrev?.next
+        var previous: ListNode? = nil
+        var tempNext: ListNode? = nil
+        
+        // 리버스 부분 처리
+        for _ in 0..<(right - left + 1) {
+            tempNext = tempCurrent?.next
+            tempCurrent?.next = previous
+            previous = tempCurrent
+            tempCurrent = tempNext
+        }
+        
+        // 서브리스트 연결 처리
+        tempLeftPrev?.next?.next = tempCurrent
+        tempLeftPrev?.next = previous
+        
+        return dummyNodeHead.next
     }
 }
