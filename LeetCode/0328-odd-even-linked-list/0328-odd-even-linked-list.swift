@@ -9,25 +9,26 @@
  * }
  */
 class Solution {
-    func oddEvenList(_ head: ListNode?) -> ListNode? {
-    guard let head = head else {
-        return nil
-    }
+func oddEvenList(_ head: ListNode?) -> ListNode? {
+        guard let head = head else {
+            return nil
+        }
 
-    var oddNode: ListNode? = head
-    var evenNode: ListNode? = head.next
-    let evenHead = evenNode
+        var tempNode: ListNode? = head
+        var evenNode: ListNode? = head.next
+        var evenNodeHead = evenNode
+        
+        while (evenNode != nil) && evenNode?.next != nil {
+            tempNode!.next = evenNode?.next
+            tempNode = tempNode!.next
 
-    while evenNode != nil && evenNode?.next != nil {
-        oddNode?.next = evenNode?.next
-        oddNode = oddNode?.next
-        evenNode?.next = oddNode?.next
-        evenNode = evenNode?.next
-    }
-
-    oddNode?.next = evenHead
-    return head
-}  
+            evenNode?.next = tempNode!.next
+            evenNode = evenNode?.next
+        }
+        
+        tempNode?.next = evenNodeHead
+        return head
+    }   
 }
 //even을 한 대로 묶기
 
