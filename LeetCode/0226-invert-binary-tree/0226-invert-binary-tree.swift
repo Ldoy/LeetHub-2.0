@@ -18,10 +18,10 @@ class Solution {
         guard let root = root else {
             return nil
         }
-        var tempNode = root
+        //var tempNode = root
         swap(root)
 
-        return tempNode
+        return root
     }
 
     private func swap(_ node: TreeNode?) {
