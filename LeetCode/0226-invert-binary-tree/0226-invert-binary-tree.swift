@@ -19,12 +19,12 @@ class Solution {
             return nil
         }
         var tempNode = root
-        check(root)
+        swap(root)
 
         return tempNode
     }
 
-    func check(_ node: TreeNode?) {
+    private func swap(_ node: TreeNode?) {
         guard let node = node else {
             return
         }
@@ -35,7 +35,7 @@ class Solution {
         node.left = tempRight
         node.right = tempLeft
 
-        check(node.left)
-        check(node.right)        
+        swap(node.left)
+        swap(node.right)        
     }
 }
