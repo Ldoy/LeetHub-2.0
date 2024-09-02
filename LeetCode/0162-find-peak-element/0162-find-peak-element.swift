@@ -24,12 +24,4 @@ class Solution {
         }
         return right
     }       
-
-    func check(nums: [Int], numIndex: Int) -> Int? {
-        if nums[numIndex] > nums[numIndex - 1], nums[numIndex] > nums[numIndex + 1] {
-            return numIndex
-        } else {
-            return nil
-        }
-    }
 }
